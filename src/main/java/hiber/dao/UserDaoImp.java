@@ -33,18 +33,10 @@ public class UserDaoImp implements UserDao {
 
     @Transactional
     @Override
-    public List<User> listUsersByCarModel(String model) {
-        String hql = "FROM User WHERE car.model LIKE :model";
+    public List<User> listUsersByCar(String model, int series) {
+        String hql = "FROM User WHERE car.model LIKE :model AND car.series = :series";
         Query<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
         query.setParameter("model", "%" + model + "%");
-        return query.getResultList();
-    }
-
-    @Transactional
-    @Override
-    public List<User> listUsersByCarSeries(int series) {
-        String hql = "FROM User WHERE car.series = :series";
-        Query<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
         query.setParameter("series", series);
         return query.getResultList();
     }
