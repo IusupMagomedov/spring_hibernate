@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Component
 @Embeddable
 public class Car {
     private String model;
