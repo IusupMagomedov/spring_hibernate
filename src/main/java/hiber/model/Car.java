@@ -5,10 +5,16 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Embeddable
+@Entity
 public class Car {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String model;
     private int series;
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    private User user;
+
 
     public Car() {
     }
@@ -45,5 +51,13 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(model, series);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

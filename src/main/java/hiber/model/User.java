@@ -21,8 +21,8 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Embedded
-    @Column(nullable = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="car_id", referencedColumnName = "id")
     private Car car;
 
     public User() {
