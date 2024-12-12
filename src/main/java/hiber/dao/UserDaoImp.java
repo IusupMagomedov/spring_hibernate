@@ -18,20 +18,17 @@ public class UserDaoImp implements UserDao {
         this.sessionFactory = sessionFactory;
     }
 
-    @Transactional
     @Override
     public void add(User user) {
         sessionFactory.getCurrentSession().save(user);
     }
 
-    @Transactional
     @Override
     public List<User> listUsers() {
         TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
         return query.getResultList();
     }
 
-    @Transactional
     @Override
     public List<User> listUsersByCar(String model, int series) {
         String hql = "FROM User WHERE car.model LIKE :model AND car.series = :series";
